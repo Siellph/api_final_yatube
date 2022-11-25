@@ -22,7 +22,8 @@ API для сервиса блогов Yatube через который можн
 Получить все записи
 [GET] http://127.0.0.1:8000/api/v1/posts/
 Results
-'''json{
+```json
+{
 "id": 0,
 "author": "string",
 "text": "string",
@@ -30,32 +31,40 @@ Results
 "image": "string",
 "group": 0
 }
-
+```
 Создать запись
 [POST] http://127.0.0.1:8000/api/v1/posts/
 Body
+```json
 {
-"text": "string",
-"image": "string",
-"group": 0
+  "text": "string",
+  "image": "string",
+  "group": 0
 }
+```
 Response
 200:
+```json
 {
-"id": 0,
-"author": "string",
-"text": "string",
-"pub_date": "2019-08-24T14:15:22Z",
-"image": "string",
-"group": 0
+  "id": 0,
+  "author": "string",
+  "text": "string",
+  "pub_date": "2019-08-24T14:15:22Z",
+  "image": "string",
+  "group": 0
 }
+```
 400:
+```json
 {
-"text": [
-"Обязательное поле."
-]
+  "text": [
+    "Обязательное поле."
+    ]
 }
+```
 401:
+```json
 {
-"detail": "Учетные данные не были предоставлены."
+  "detail": "Учетные данные не были предоставлены."
 }
+```
