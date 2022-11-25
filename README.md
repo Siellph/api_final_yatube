@@ -22,7 +22,7 @@ API для сервиса блогов Yatube через который можн
 Получить все записи
 [GET] http://127.0.0.1:8000/api/v1/posts/
 Results
-{
+'''json{
 "id": 0,
 "author": "string",
 "text": "string",
