@@ -29,27 +29,30 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField(
-        read_only=True,
+    user = serializers.SlugRelatedField(
+        queryset=User.objects.all(),
+        slug_field='username',
         default=serializers.CurrentUserDefault()
     )
     following = serializers.SlugRelatedField(
-        slug_field="username",
         queryset=User.objects.all(),
+        slug_field='username',
     )
 
     class Meta:
+        fields = '__all__'
         model = Follow
-        fields = ('user', 'following')
-
         validators = [
             serializers.UniqueTogetherValidator(
                 queryset=Follow.objects.all(),
-                fields=('user', 'following')
+                fields=['user', 'following'],
+                message='Вы уже подписаны'
             )
         ]
 
     def validate(self, data):
-        if self.context['request'].user == data['following']:
-            raise serializers.ValidationError("Нельзя на себя подписываться")
+        if data['user'] == data['following']:
+            raise serializers.ValidationError(
+                'Нельзя подписаться на себя'
+            )
         return data
